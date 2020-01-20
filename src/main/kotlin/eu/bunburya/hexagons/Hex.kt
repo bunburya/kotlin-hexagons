@@ -22,6 +22,15 @@ data class Hex (val q: Int, val r: Int, val s: Int = -q - r) {
             Hex(-1, 1, 0),
             Hex(0, 1, -1)
         )
+
+        val DIAGONALS = arrayListOf(
+            Hex(2, -1, -1),
+            Hex(1, -2, 1),
+            Hex(-1, -1, 2),
+            Hex(-2, 1, 1),
+            Hex(-1, 2, -1),
+            Hex(1, 1, -2)
+        )
     }
 
     // https://www.redblobgames.com/grids/hexagons/implementation.html#hex-arithmetic
@@ -35,13 +44,14 @@ data class Hex (val q: Int, val r: Int, val s: Int = -q - r) {
     val length: Int get() = ((abs(q) + abs(r) + abs(s)) / 2)
     fun distanceTo(other: Hex): Int = (this - other).length
 
-    fun direction(_d: Int): Hex {
-        val d: Int
-        if (_d !in 0..5) d = (6 + (_d % 6)) % 6
-        else d = _d
-        return DIRECTIONS[d]
+    fun direction(d: Int): Hex {
+        val _d: Int
+        if (d !in 0..5) _d = (6 + (d % 6)) % 6
+        else _d = d
+        return DIRECTIONS[_d]
     }
     fun neighbour(d: Int): Hex = this + direction(d)
+    fun diagonalNeighbour(d: Int): Hex = this + DIAGONALS[d]
 
     // https://www.redblobgames.com/grids/hexagons/implementation.html#rotation
 

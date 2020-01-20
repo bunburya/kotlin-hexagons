@@ -8,7 +8,7 @@ class FractionalHex (val q: Double, val r: Double, val s: Double = -q - r) {
 
     // https://www.redblobgames.com/grids/hexagons/implementation.html#fractionalhex
 
-    fun round(): Hex {
+    fun hexRound(): Hex {
         // https://www.redblobgames.com/grids/hexagons/implementation.html#rounding
         var qRounded = q.roundToInt()
         var rRounded = r.roundToInt()
@@ -28,7 +28,7 @@ class FractionalHex (val q: Double, val r: Double, val s: Double = -q - r) {
 
     // https://www.redblobgames.com/grids/hexagons/implementation.html#line-drawing
 
-    fun lerp(other: FractionalHex, t: Double): FractionalHex {
+    fun hexLerp(other: FractionalHex, t: Double): FractionalHex {
         return FractionalHex(
             q * (1 - t) + other.q * t,
             r * (1 - t) + other.r * t,
@@ -37,14 +37,14 @@ class FractionalHex (val q: Double, val r: Double, val s: Double = -q - r) {
     }
 
     companion object {
-        fun lineDraw(a: Hex, b: Hex): ArrayList<Hex> {
+        fun hexLineDraw(a: Hex, b: Hex): ArrayList<Hex> {
             val N = a.distanceTo(b)
             val aNudge = FractionalHex(a.q + 1e-6, a.r + 1e-6, a.s - 2e-6)
             val bNudge = FractionalHex(b.q + 1e-6, b.r + 1e-6, b.s - 2e-6)
             val results = arrayListOf<Hex>()
             val step = 1.0 / max(N, 1)
             for (i in 0..N) {
-                results.add(aNudge.lerp(bNudge, step * i).round())
+                results.add(aNudge.hexLerp(bNudge, step * i).hexRound())
             }
             return results
         }
