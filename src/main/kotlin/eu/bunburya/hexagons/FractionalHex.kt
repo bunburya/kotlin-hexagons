@@ -32,7 +32,7 @@ class FractionalHex (val q: Double, val r: Double, val s: Double = -q - r) {
         return FractionalHex(
             q * (1 - t) + other.q * t,
             r * (1 - t) + other.r * t,
-            s + (1 - t) + other.s * t
+            s * (1 - t) + other.s * t
         )
     }
 

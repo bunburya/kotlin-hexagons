@@ -76,7 +76,7 @@ internal class HexagonTests {
             a.r * 0.4 + b.r * 0.3 + c.r * 0.3,
             a.s * 0.4 + b.s * 0.3 + c.s * 0.3
         ).hexRound())
-        assertEquals(a.hexRound(), FractionalHex(
+        assertEquals(c.hexRound(), FractionalHex(
             a.q * 0.3 + b.q * 0.3 + c.q * 0.4,
             a.r * 0.3 + b.r * 0.3 + c.r * 0.4,
             a.s * 0.3 + b.s * 0.3 + c.s * 0.4
@@ -102,4 +102,53 @@ internal class HexagonTests {
         val pointy = Layout(LAYOUT_POINTY, Point(10.0, 15.0), Point(35.0, 71.0))
         assertEquals(h, pointy.pixelToHex(pointy.hexToPixel(h)).hexRound())
     }
+
+    @Test
+    fun offsetRoundTrip() {
+        val a = Hex(3, 4, -7)
+        val b = OffsetCoord(1, -3)
+        assertEquals(a, OffsetCoord.qOffsetToCube(Offset.EVEN, OffsetCoord.qOffsetFromCube(Offset.EVEN, a)))
+        assertEquals(b, OffsetCoord.qOffsetFromCube(Offset.EVEN, OffsetCoord.qOffsetToCube(Offset.EVEN, b)))
+        assertEquals(a, OffsetCoord.qOffsetToCube(Offset.ODD, OffsetCoord.qOffsetFromCube(Offset.ODD, a)))
+        assertEquals(b, OffsetCoord.qOffsetFromCube(Offset.ODD, OffsetCoord.qOffsetToCube(Offset.ODD, b)))
+        assertEquals(a, OffsetCoord.rOffsetToCube(Offset.EVEN, OffsetCoord.rOffsetFromCube(Offset.EVEN, a)))
+        assertEquals(b, OffsetCoord.rOffsetFromCube(Offset.EVEN, OffsetCoord.rOffsetToCube(Offset.EVEN, b)))
+        assertEquals(a, OffsetCoord.rOffsetToCube(Offset.ODD, OffsetCoord.rOffsetFromCube(Offset.ODD, a)))
+        assertEquals(b, OffsetCoord.rOffsetFromCube(Offset.ODD, OffsetCoord.rOffsetToCube(Offset.ODD, b)))
+    }
+
+    @Test
+    fun offsetFromCube() {
+        assertEquals(OffsetCoord(1, 3), OffsetCoord.qOffsetFromCube(Offset.EVEN, Hex(1, 2, -3)))
+        assertEquals(OffsetCoord(1, 2), OffsetCoord.qOffsetFromCube(Offset.ODD, Hex(1, 2, -3)))
+    }
+
+    @Test
+    fun offsetToCube() {
+        assertEquals(Hex(1, 2, -3), OffsetCoord.qOffsetToCube(Offset.EVEN, OffsetCoord(1, 3)))
+        assertEquals(Hex(1, 2, -3), OffsetCoord.qOffsetToCube(Offset.ODD, OffsetCoord(1, 2)))
+    }
+
+    @Test
+    fun doubledRoundTrip() {
+        val a = Hex(3, 4, -7)
+        val b = DoubledCoord(1, -3)
+        assertEquals(a, DoubledCoord.qDoubledFromCube(a).qDoubledToCube())
+        assertEquals(b, DoubledCoord.qDoubledFromCube(b.qDoubledToCube()))
+        assertEquals(a, DoubledCoord.rDoubledFromCube(a).rDoubledToCube())
+        assertEquals(b, DoubledCoord.rDoubledFromCube(b.rDoubledToCube()))
+    }
+
+    @Test
+    fun doubledFromCube() {
+        assertEquals(DoubledCoord(1, 5), DoubledCoord.qDoubledFromCube(Hex(1, 2, -3)))
+        assertEquals(DoubledCoord(4, 2), DoubledCoord.rDoubledFromCube(Hex(1, 2, -3)))
+    }
+
+    @Test
+    fun doubledToCube() {
+        assertEquals(Hex(1, 2, -3), DoubledCoord(1, 5).qDoubledToCube())
+        assertEquals(Hex(1, 2, -3), DoubledCoord(4, 2).rDoubledToCube())
+    }
+
 }
