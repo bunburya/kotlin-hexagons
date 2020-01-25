@@ -5,6 +5,11 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
 import java.lang.IllegalArgumentException
 
+/**
+ * Tests for the hexagons library.  Mostly based on Java code taken from
+ * https://www.redblobgames.com/grids/hexagons/codegen/output/Tests.java
+ */
+
 internal class HexagonTests {
 
     // Tests mostly based on Java code taken from

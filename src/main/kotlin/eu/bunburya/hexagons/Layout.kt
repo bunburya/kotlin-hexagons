@@ -31,6 +31,16 @@ val LAYOUT_FLAT = Orientation(
     0.0
 )
 
+/**
+ * A class which contains data and helper functions for drawing a hexagon to screen.  Based on the implementation at
+ * https://www.redblobgames.com/grids/hexagons/implementation.html#layout
+ *
+ * @param orientation One of Orientation.LAYOUT_POINTY or Orientation.LAYOUT_FLAT; determines whether the hexagons
+ * drawn using this layout are pointy-topped or flat-topped.
+ * @param size The size of each hexagon.
+ * @param origin The centre of the hexagon at (0, 0, 0) (in cubic coordinates).
+ */
+
 class Layout (val orientation: Orientation, val size: Point, val origin: Point) {
 
     fun hexToPixel(h: Hex): Point {

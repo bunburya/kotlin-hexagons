@@ -1,10 +1,17 @@
 package eu.bunburya.hexagons
 
-data class DoubledCoord(val col: Int, val row: Int) {
+/**
+ * A class representing offset coordinates of a hexagon, rather than cubic coordinates.  Not dealt with specifically in
+ * the implementation guide but taken from the Java code at
+ * https://www.redblobgames.com/grids/hexagons/codegen/output/Tests.java
+ *
+ * See also https://www.redblobgames.com/grids/hexagons/#coordinates
+ *
+ * @param col  The column in which the hexagon is located.
+ * @param row  The row in which the hexagon is located.
+ */
 
-    // Not dealt with specifically in the implementation guide but taken from the Java code at
-    // https://www.redblobgames.com/grids/hexagons/codegen/output/Tests.java
-    // See also https://www.redblobgames.com/grids/hexagons/#coordinates
+data class DoubledCoord(val col: Int, val row: Int) {
 
     companion object{
         fun qDoubledFromCube(hex: Hex): DoubledCoord {

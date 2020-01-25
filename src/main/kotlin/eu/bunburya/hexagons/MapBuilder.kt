@@ -8,9 +8,14 @@ import kotlin.math.min
     https://www.redblobgames.com/grids/hexagons/implementation.html#map-optimized-storage.  Implementation depends on
     the type of loop used to generate the map, and I'm not sure I will want / need array-based storage in any event. */
 
+/**
+ * An object with helper functions for building different types of maps of hexagons.  Based on the implementations at
+ * https://www.redblobgames.com/grids/hexagons/implementation.html#map-shapes
+ */
+
 object MapBuilder {
 
-    // https://www.redblobgames.com/grids/hexagons/implementation.html#map-shapes
+    //
 
     // NOTE:  I'm not sure hexFuncs *quite* correctly matches (q,r,s) combinations to map layouts (as described in the
     // link above), but it's "good enough" for now.

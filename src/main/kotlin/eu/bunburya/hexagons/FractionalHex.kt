@@ -4,9 +4,17 @@ import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.roundToInt
 
-class FractionalHex (val q: Double, val r: Double, val s: Double = -q - r) {
+/**
+ * A class representing a hexagon with floating point coordinates (rather than integer coordinates).  Based on the
+ * implementation at https://www.redblobgames.com/grids/hexagons/implementation.html#fractionalhex
+ *
+ * @param q The q component of the cubic (q, r, s) coordinates of the hexagon.
+ * @param r The r component of the cubic (q, r, s) coordinates of the hexagon.
+ * @param s The s component of the cubic (q, r, s)coordinates of the hexagon.  This is optional; if not provided, it
+ * will be calculated based on the constraint q + r + s = 0.
+ */
 
-    // https://www.redblobgames.com/grids/hexagons/implementation.html#fractionalhex
+class FractionalHex (val q: Double, val r: Double, val s: Double = -q - r) {
 
     fun hexRound(): Hex {
         // https://www.redblobgames.com/grids/hexagons/implementation.html#rounding

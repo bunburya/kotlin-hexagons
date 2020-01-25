@@ -1,19 +1,25 @@
 package eu.bunburya.hexagons
 
-import java.lang.Math.abs
-import kotlin.math.max
+import kotlin.math.abs
 
-class InvalidCoordinatesError(msg: String): Exception(msg)
+/**
+ * A class representing a basic hexagon shape.  Based on the implementation at
+ * https://www.redblobgames.com/grids/hexagons/implementation.html#hex
+ *
+ * @param q The q component of the cubic (q, r, s) coordinates of the hexagon.
+ * @param r The r component of the cubic (q, r, s) coordinates of the hexagon.
+ * @param s The s component of the cubic (q, r, s)coordinates of the hexagon.  This is optional; if not provided, it
+ * will be calculated based on the constraint q + r + s = 0.
+ */
 
 data class Hex (val q: Int, val r: Int, val s: Int = -q - r) {
-
-    // https://www.redblobgames.com/grids/hexagons/implementation.html#hex
 
     init {
         require(q + r + s == 0) { "Coordinates must sum to zero" }
     }
 
     companion object {
+
         val DIRECTIONS = arrayListOf(
             Hex(1, 0, -1),
             Hex(1, -1, 0),

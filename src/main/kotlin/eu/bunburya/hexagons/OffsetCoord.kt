@@ -8,6 +8,14 @@ enum class Offset(val value: Int) {
     operator fun plus(other: Int) = this.value + other
 }
 
+/**
+ * A class representing offset coordinates of a hexagon, rather than cubic coordinates.  Based on the implementation at
+ * https://www.redblobgames.com/grids/hexagons/implementation.html#offset
+ *
+ * @param col  The column in which the hexagon is located.
+ * @param row  The row in which the hexagon is located.
+ */
+
 data class OffsetCoord (val col: Int, val row: Int) {
 
     // https://www.redblobgames.com/grids/hexagons/implementation.html#offset
