@@ -28,7 +28,7 @@ object MapBuilder {
         "sr" to {s: Int, r: Int -> Hex(-r - s, r, s)}
     )
 
-    fun parallelogram(mapHeight: Int, mapWidth: Int, mapOrientation: String = "qr"): MutableSet<Hex> {
+    fun parallelogram(mapWidth: Int, mapHeight: Int, mapOrientation: String = "qr"): MutableSet<Hex> {
         require(mapOrientation in hexFuncs) { "Bad value for mapOrientation" }
         val hexSet = mutableSetOf<Hex>()
         val hexFunc = hexFuncs[mapOrientation]!!
@@ -65,7 +65,7 @@ object MapBuilder {
         return hexSet
     }
 
-    fun rectangle(mapHeight: Int, mapWidth: Int, mapOrientation: String): MutableSet<Hex> {
+    fun rectangle(mapWidth: Int, mapHeight: Int, mapOrientation: String): MutableSet<Hex> {
         require(mapOrientation in hexFuncs) { "Bad value for mapOrientation" }
         val hexSet = mutableSetOf<Hex>()
         val hexFunc = hexFuncs[mapOrientation]!!
