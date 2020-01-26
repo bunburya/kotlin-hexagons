@@ -7,7 +7,7 @@ import kotlin.math.sqrt
 
 // https://www.redblobgames.com/grids/hexagons/implementation.html#layout
 
-class Orientation (
+class LayoutOrientation (
     val f0: Double,
     val f1: Double,
     val f2: Double,
@@ -19,13 +19,13 @@ class Orientation (
     val startAngle: Double
 )
 
-val LAYOUT_POINTY = Orientation(
+val LAYOUT_POINTY = LayoutOrientation(
     sqrt(3.0), sqrt(3.0) / 2.0, 0.0, 3.0 / 2.0,
     sqrt(3.0) / 3.0, -1.0 / 3.0, 0.0, 2.0 / 3.0,
     0.5
 )
 
-val LAYOUT_FLAT = Orientation(
+val LAYOUT_FLAT = LayoutOrientation(
     3.0 / 2.0, 0.0, sqrt(3.0) / 2.0, sqrt(3.0),
     2.0 / 3.0, 0.0, -1.0 / 3.0, sqrt(3.0) / 3.0,
     0.0
@@ -41,7 +41,7 @@ val LAYOUT_FLAT = Orientation(
  * @param origin The centre of the hexagon at (0, 0, 0) (in cubic coordinates).
  */
 
-class Layout (val orientation: Orientation, val size: Point, val origin: Point) {
+class Layout (val orientation: LayoutOrientation, val size: Point, val origin: Point) {
 
     fun hexToPixel(h: Hex): Point {
         // https://www.redblobgames.com/grids/hexagons/implementation.html#hex-to-pixel
